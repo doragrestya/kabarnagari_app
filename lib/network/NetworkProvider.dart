@@ -199,15 +199,17 @@ class NetworkProvider extends BaseEndPoint {
   Future<List> getOlaharaga() async{
     // TODO: implement getOlaharaga
     final response = await http.post(ConstantFile().baseUrl + "getOlahraga");
-    ModelNews listData = modelNewsFromJson(response.body);
-    return listData.article;
+    var data = jsonDecode(response.body);
+    List finalData = data['data'];
+    return finalData;
   }
 
   @override
   Future<List> getPendidikan() async{
     // TODO: implement getPendidikan
     final response = await http.post(ConstantFile().baseUrl + "getPendidikan");
-    ModelNews listData = modelNewsFromJson(response.body);
-    return listData.article;
+    var data = jsonDecode(response.body);
+    List finalData = data['data'];
+    return finalData;
   }
 }

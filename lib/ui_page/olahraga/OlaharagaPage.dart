@@ -14,6 +14,13 @@ class OlahragaPage extends StatefulWidget {
 
 class _OlahragaPageState extends State<OlahragaPage> {
   BaseEndPoint network = NetworkProvider();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -48,11 +55,11 @@ class _OlahragaPageState extends State<OlahragaPage> {
           ),
         ),
         FutureBuilder(
-          future: network.getNews(""),
+          future: network.getOlaharaga(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) print(snapshot.error);
             return snapshot.hasData
-                ? ListOlahraga(
+                ? itemListOlahraga(
               list: snapshot.data,
             )
                 : Center(
@@ -65,45 +72,45 @@ class _OlahragaPageState extends State<OlahragaPage> {
   }
 }
 
-class ListOlahraga extends StatefulWidget {
-  List list;
-  ListOlahraga({this.list});
-  @override
-  _ListOlahragaState createState() => _ListOlahragaState();
-}
-
-class _ListOlahragaState extends State<ListOlahraga> {
-  BaseEndPoint network = NetworkProvider();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 16),
-          child: Text(
-            'Headlines',
-            style: TextStyle(
-                color: Colors.red, fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-        ),
-        FutureBuilder(
-          future: network.getOlaharaga(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasError) print(snapshot.error);
-            return snapshot.hasData
-                ? itemListOlahraga(
-                    list: snapshot.data,
-                  )
-                : Center(
-                    child: CircularProgressIndicator(),
-                  );
-          },
-        ),
-      ],
-    );
-  }
-}
+//class ListOlahraga extends StatefulWidget {
+//  List list;
+//  ListOlahraga({this.list});
+//  @override
+//  _ListOlahragaState createState() => _ListOlahragaState();
+//}
+//
+//class _ListOlahragaState extends State<ListOlahraga> {
+//  BaseEndPoint network = NetworkProvider();
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return ListView(
+//      children: <Widget>[
+//        Padding(
+//          padding: const EdgeInsets.only(left: 16.0, top: 16),
+//          child: Text(
+//            'Headlines',
+//            style: TextStyle(
+//                color: Colors.red, fontSize: 24, fontWeight: FontWeight.bold),
+//          ),
+//        ),
+//        FutureBuilder(
+//          future: network.getOlaharaga(),
+//          builder: (BuildContext context, AsyncSnapshot snapshot) {
+//            if (snapshot.hasError) print(snapshot.error);
+//            return snapshot.hasData
+//                ? itemListOlahraga(
+//                    list: snapshot.data,
+//                  )
+//                : Center(
+//                    child: CircularProgressIndicator(),
+//                  );
+//          },
+//        ),
+//      ],
+//    );
+//  }
+//}
 
 class itemListOlahraga extends StatefulWidget {
   List list;
@@ -123,7 +130,7 @@ class _itemListOlahragaState extends State<itemListOlahraga> {
       physics: NeverScrollableScrollPhysics(),
       itemCount: widget.list.length,
       itemBuilder: (BuildContext context, int index) {
-        Article data = widget.list[index];
+        final data = widget.list[index];
         dateFormat = DateFormat("dd-MM-yyyy").format(data.dateNews);
         return Padding(
           padding: const EdgeInsets.only(left: 16, right: 2, bottom: 8),

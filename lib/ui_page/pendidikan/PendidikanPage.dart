@@ -48,11 +48,11 @@ class _PendidikanPageState extends State<PendidikanPage> {
           ),
         ),
         FutureBuilder(
-          future: network.getNews(""),
+          future: network.getPendidikan(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) print(snapshot.error);
             return snapshot.hasData
-                ? ListPendidikan(
+                ? itemListPendidikan(
               list: snapshot.data,
             )
                 : Center(
@@ -123,7 +123,7 @@ class _itemListPendidikanState extends State<itemListPendidikan> {
       physics: NeverScrollableScrollPhysics(),
       itemCount: widget.list.length,
       itemBuilder: (BuildContext context, int index) {
-        Article data = widget.list[index];
+        final data = widget.list[index];
         dateFormat = DateFormat("dd-MM-yyyy").format(data.dateNews);
         return Padding(
           padding: const EdgeInsets.only(left: 16, right: 2, bottom: 8),

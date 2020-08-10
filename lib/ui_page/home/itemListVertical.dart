@@ -112,17 +112,6 @@ class _itemListVerticalState extends State<itemListVertical> {
                                 Row(
                                   children: <Widget>[
                                     IconButton(
-                                      icon: Icon(Icons.edit, color: Colors.red,),
-//                                      onPressed: (){
-//                                        Navigator.push(context, MaterialPageRoute(builder: (context) => EditPage(
-//                                          title : data.titleNews,
-//                                          content : data.contentNews,
-//                                          deskripsi : data.descriptionNews,
-//                                          image : data.imageNews,
-//                                        )));
-//                                    },
-                                    ),
-                                    IconButton(
                                         icon: Icon(Icons.delete_forever,
                                             color: Colors.red),
                                         onPressed: () {
